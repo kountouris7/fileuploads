@@ -25,6 +25,7 @@ class UploadsController extends Controller
     public function show()
     {
         $contents = Storage::get('photos');
+
         dd($contents);
         return view('show' , compact('contents'));
     }
