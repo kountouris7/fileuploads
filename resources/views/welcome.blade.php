@@ -67,7 +67,7 @@
     <form action="{{route('upload')}}" enctype="multipart/form-data" method="POST">
         <p>
             <label for="photo">
-                <input type="file" name="photo" id="photo">
+                <input type="file" name="fileToUpload" id="fileToUpload">
             </label>
         </p>
         <button>Upload</button>

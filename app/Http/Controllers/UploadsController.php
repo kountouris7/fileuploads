@@ -5,21 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class UploadsController extends Controller
 {
     public function uploads(Request $request)
     {
         // cache the file
-        $file = $request->file('photo');
-
+        $file = request('fileToUpload');
+        //dd($file);
         // generate a new filename. getClientOriginalExtension() for the file extension
         $filename = $file->getClientOriginalName() . time() . '.' . $file->getClientOriginalExtension();
-
-      //  dd($filename);
+        //dd($filename);
         // save to storage/app/photos as the new $filename
-       // $path = $file->storeAs('photos', $filename);
-        Storage::cloud()->put($filename, 'Hello World');
-
+        //$path = $file->storeAs('photos', $filename);
+        Storage::cloud()->put($filename, 'HelloWorld');
         return redirect(route('show'));
     }
 

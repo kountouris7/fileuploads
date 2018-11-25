@@ -12,12 +12,13 @@
 */
 
 
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('put', 'UploadsController@uploads')->name('upload');
+Route::post('upload', 'UploadsController@uploads')->name('upload');
 Route::get('show', 'UploadsController@show')->name('show');
 
 Auth::routes();
@@ -59,9 +60,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
         return [$filename => $path];
     });
-});*/
+});
 
-/*Route::get('put-existing', function() {
+Route::get('put-existing', function() {
     $filename = 'laravel.png';
     $filePath = public_path($filename);
     $fileData = File::get($filePath);
