@@ -1,10 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    @foreach($contents as $object)
+    @foreach($contents as $content)
         <div class="container">
+
             <ul>
-            {{$object['name']}}
+            {{$content['name']}}
             </ul>
+           {{-- <show-component :content="{{$content['name']}}"></show-component>--}}
         </div>
 
     @endforeach
