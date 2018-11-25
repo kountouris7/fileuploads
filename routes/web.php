@@ -17,38 +17,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::any('put', 'UploadsController@uploads')->name('upload');
+Route::post('put', 'UploadsController@uploads')->name('upload');
 Route::get('show', 'UploadsController@show')->name('show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 //Route::get('put', function() {
 //    Storage::cloud()->put('test.txt', 'Hello World');
 //    return 'File was saved to Google Drive';
 //});
 
-/*Route::get('put-existing', function() {
-    $filename = 'laravel.png';
-    $filePath = public_path($filename);
-    $fileData = File::get($filePath);
-
-    Storage::cloud()->put($filename, $fileData);
-    return 'File was saved to Google Drive';
-});
-
-Route::get('list', function() {
-    $dir = '/';
-    $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-
-    //return $contents->where('type', '=', 'dir'); // directories
-    return $contents->where('type', '=', 'file'); // files
-});
-
-Route::get('list-folder-contents', function() {
+/*Route::get('list-folder-contents', function() {
     // The human readable folder name to get the contents of...
     // For simplicity, this folder is assumed to exist in the root directory.
     $folder = 'Test Dir';
@@ -78,7 +59,27 @@ Route::get('list-folder-contents', function() {
 
         return [$filename => $path];
     });
+});*/
+
+/*Route::get('put-existing', function() {
+    $filename = 'laravel.png';
+    $filePath = public_path($filename);
+    $fileData = File::get($filePath);
+
+    Storage::cloud()->put($filename, $fileData);
+    return 'File was saved to Google Drive';
 });
+
+Route::get('list', function() {
+    $dir = '/';
+    $recursive = false; // Get subdirectories also?
+    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+
+    //return $contents->where('type', '=', 'dir'); // directories
+    return $contents->where('type', '=', 'file'); // files
+});
+
+
 
 Route::get('get', function() {
     $filename = 'test.txt';

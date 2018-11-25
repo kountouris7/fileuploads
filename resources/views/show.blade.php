@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    {{'here show uploaded'}}
+    @foreach($contents as $object)
+        <div class="container">
+            <ul>
+            {{$object['name']}}
+            </ul>
+        </div>
+
+    @endforeach
 
     @endsection
