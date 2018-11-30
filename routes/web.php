@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('upload', 'UploadsController@uploads')->name('upload');
+Route::post('upload', 'UploadsController@upload')->name('upload');
 Route::get('show', 'UploadsController@show')->name('show');
 
 Auth::routes();
@@ -60,9 +60,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
         return [$filename => $path];
     });
-});
+});*/
 
-Route::get('put-existing', function() {
+/*Route::get('put-existing', function() {
     $filename = 'laravel.png';
     $filePath = public_path($filename);
     $fileData = File::get($filePath);
@@ -76,7 +76,7 @@ Route::get('list', function() {
     $recursive = false; // Get subdirectories also?
     $contents = collect(Storage::cloud()->listContents($dir, $recursive));
 
-    //return $contents->where('type', '=', 'dir'); // directories
+    //return $contents ; // directories
     return $contents->where('type', '=', 'file'); // files
 });
 
