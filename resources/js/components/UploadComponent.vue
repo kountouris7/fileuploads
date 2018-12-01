@@ -30,7 +30,11 @@
 
 
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+
+            axios.get('show').then(response => {
+                this.results = response.data
+            });
         },
         data() {
             return {
