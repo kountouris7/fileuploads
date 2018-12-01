@@ -12,7 +12,6 @@
 */
 
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
@@ -20,10 +19,37 @@ Route::get('/', function () {
 });
 Route::post('upload', 'UploadsController@upload')->name('upload');
 Route::get('show', 'RetrieveCloudController@showFiles')->name('showFile');
-
+Route::get('shareFile/{filename}', 'RetrieveCloudController@shareFile')->name('shareFile');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+/*Route::get('share', function () {
+
+    $filename = '1543660478Single Fields - Sheet1.csv';
+
+    // Get the file to find the ID
+    $dir       = '14cT7z6WlCo1-G6kIlhsy-8FpmaGOJlcE';
+    $recursive = false; // Get subdirectories also?
+    $contents  = collect(Storage::cloud()->listContents($dir, $recursive));
+    $file      = $contents
+        ->where('type', '=', 'file')
+        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+        ->first(); // there can be duplicate file names!
+
+    // Change permissions
+    // - https://developers.google.com/drive/v3/web/about-permissions
+    // - https://developers.google.com/drive/v3/reference/permissions
+    $service    = Storage::cloud()->getAdapter()->getService();
+    $permission = new \Google_Service_Drive_Permission();
+    $permission->setRole('reader');
+    $permission->setType('anyone');
+    $permission->setAllowFileDiscovery(false);
+    $permissions = $service->permissions->create($file['basename'], $permission);
+
+    return Storage::cloud()->read($file['path']);
+
+});*/
 
 //Route::get('put', function() {
 //    Storage::cloud()->put('test.txt', 'Hello World');
@@ -278,34 +304,7 @@ Route::get('rename-dir', function() {
     return 'Directory was renamed in Google Drive';
 });
 
-Route::get('share', function() {
-    $filename = 'test.txt';
 
-    // Store a demo file
-    Storage::cloud()->put($filename, 'Hello World');
-
-    // Get the file to find the ID
-    $dir = '/';
-    $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-    $file = $contents
-        ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-        ->first(); // there can be duplicate file names!
-
-    // Change permissions
-    // - https://developers.google.com/drive/v3/web/about-permissions
-    // - https://developers.google.com/drive/v3/reference/permissions
-    $service = Storage::cloud()->getAdapter()->getService();
-    $permission = new \Google_Service_Drive_Permission();
-    $permission->setRole('reader');
-    $permission->setType('anyone');
-    $permission->setAllowFileDiscovery(false);
-    $permissions = $service->permissions->create($file['basename'], $permission);
-
-    return Storage::cloud()->url($file['path']);
-});
 
 Route::get('export/{basename}', function ($basename) {
     $service = Storage::cloud()->getAdapter()->getService();

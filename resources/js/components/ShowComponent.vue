@@ -6,11 +6,19 @@
 
 <script>
     export default {
-        props: ['content'],
+        props: ['contents'],
 
         data() {
             return {
+                name:''
+
             }},
+
+        mounted() {
+            axios.get('show').then(response => {
+                this.results = response.data
+            })
+        }
     }
 
 
