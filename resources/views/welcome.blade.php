@@ -27,7 +27,7 @@
 
 <div id="app">
 
-    <example-component></example-component>
+    <upload-component></upload-component>
 
     <a href="{{route('showFile')}}">Show Uploaded Files</a>
 </div>

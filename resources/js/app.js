@@ -14,7 +14,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('upload-component', require('./components/UploadComponent.vue'));
 Vue.component('show-component', require('./components/ShowComponent.vue'));
 
 const app = new Vue({
