@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::post('upload', 'UploadsController@upload')->name('upload');
-Route::get('show', 'UploadsController@show')->name('show');
+Route::get('show', 'RetrieveCloudController@showFiles')->name('showFile');
 
 Auth::routes();
 

@@ -29,7 +29,7 @@
 
     <example-component></example-component>
 
-    <a href="{{route('show')}}">Show Uploaded Files</a>
+    <a href="{{route('showFile')}}">Show Uploaded Files</a>
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
