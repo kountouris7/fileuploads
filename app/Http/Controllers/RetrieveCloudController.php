@@ -10,7 +10,7 @@ class RetrieveCloudController extends Controller
     {
           $contents = Storage::cloud()->listContents('14cT7z6WlCo1-G6kIlhsy-8FpmaGOJlcE');
           $cloudFolderLink = Storage::cloud()->url('14cT7z6WlCo1-G6kIlhsy-8FpmaGOJlcE');
-//dd($contents);
+
           return view('showFiles', compact('contents', 'cloudFolderLink'));
     }
 

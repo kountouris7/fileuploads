@@ -15,15 +15,6 @@
     @include('layouts.welcomeStyles')
 </head>
 <body>
-{{-- <form action="{{route('upload')}}" enctype="multipart/form-data" method="POST">
-     <p>
-         <label for="photo">
-             <input type="file" name="image" id="image">
-         </label>
-     </p>
-     <button>Upload</button>
-     {{ csrf_field() }}
- </form>--}}
 
 <div id="app">
 
