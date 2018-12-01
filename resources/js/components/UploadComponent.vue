@@ -10,8 +10,6 @@
                         </div>
 
                         <form @submit="formSubmit" enctype="multipart/form-data">
-                         <!--   <strong>Name:</strong>
-                            <input type="text" class="form-control" v-model="name">-->
                             <strong>Image:</strong>
                             <input type="file" class="form-control" v-on:change="onImageChange">
                             <button class="btn btn-success">Submit</button>
@@ -28,14 +26,12 @@
 
     export default {
 
-
         mounted() {
             console.log('Component mounted.')
 
         },
         data() {
             return {
-              /*  name: '',*/
                 image: '',
                 success: ''
             };
@@ -50,7 +46,8 @@
                 let currentObj = this;
                 const config = {
                     headers: {'content-type': 'multipart/form-data'}
-                }
+                };
+
                 let formData = new FormData();
                 formData.append('image', this.image);
                 axios.post('/upload', formData, config)

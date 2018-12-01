@@ -1,23 +1,32 @@
 <template>
     <div id="app">
+        <button v-on:click="redirect">
+            {{contents.name}}
+        </button>
 
     </div>
 </template>
 
 <script>
     export default {
-        props: ['contents'],
+        props: ['content', 'cloudFolderLink'],
 
         data() {
             return {
-                name:''
+                contents: this.content,
+                url: this.cloudFolderLink
+            }
+        },
 
-            }},
+        methods: {
+            redirect() {
+                axios.get('/shareFile/' + this.content.name)
+                    .then(response => {
+                        console.log(response);
+                        window.alert(response.data);
 
-        mounted() {
-            axios.get('show').then(response => {
-                this.results = response.data
-            })
+                    });
+            }
         }
     }
 

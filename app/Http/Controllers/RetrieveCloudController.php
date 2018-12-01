@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RetrieveCloudController extends Controller
 {
-    public function showFiles(Request $request)
+    public function showFiles()
     {
           $contents = Storage::cloud()->listContents('14cT7z6WlCo1-G6kIlhsy-8FpmaGOJlcE');
           $cloudFolderLink = Storage::cloud()->url('14cT7z6WlCo1-G6kIlhsy-8FpmaGOJlcE');
-
+//dd($contents);
           return view('showFiles', compact('contents', 'cloudFolderLink'));
     }
 
@@ -37,6 +36,8 @@ class RetrieveCloudController extends Controller
         $permission->setAllowFileDiscovery(false);
         $permissions = $service->permissions->create($file['basename'], $permission);
 
-        return Storage::cloud()->read($file['path']);
+        $pathToRead = Storage::cloud()->read($file['path']);
+
+        return $pathToRead;
     }
 }
