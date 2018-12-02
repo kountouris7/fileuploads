@@ -8,7 +8,7 @@
         @foreach($contents as $cont => $content)
             <show-component :content="{{json_encode($content)}}"
                             :cloud-Folder-Link="{{json_encode($cloudFolderLink)}}"></show-component>
-            <strong><a href="{{'https://drive.google.com/open?id=' . $content['basename']}}">View files in Google Drive Folder</a></strong>
+            <strong><a href="{{'https://drive.google.com/open?id=' . $content['basename']}}">View file in Google Drive Folder</a></strong>
             <hr>
         @endforeach
         <br>
