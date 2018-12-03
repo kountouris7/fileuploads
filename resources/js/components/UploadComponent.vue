@@ -12,13 +12,19 @@
                         <form @submit="formSubmit" enctype="multipart/form-data">
                             <strong>Image:</strong>
                             <input type="file" class="form-control" v-on:change="onImageChange">
-                            <button class="btn btn-success">Submit</button>
+
+                            <div v-if="loading" class="loader"></div>
+                            <div v-else>
+                                <button class="btn btn-success">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 </template>
 
 
@@ -35,9 +41,11 @@
         data() {
             return {
                 image: '',
-                success: ''
+                success: '',
+                loading: false,
             };
         },
+
         methods: {
             onImageChange(e) {
                 console.log(e.target.files[0]);
@@ -52,15 +60,52 @@
 
                 let formData = new FormData();
                 formData.append('image', this.image);
+                this.loading = true;
                 axios.post('/upload', formData, config)
+
                     .then(function (response) {
                         currentObj.success = response.data.success;
                     })
+
                     .catch(function (error) {
                         currentObj.output = error;
                     });
+
             }
+
+
         }
     }
 
 </script>
+
+<style scoped>
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
